@@ -6,36 +6,41 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\Router\Http\Segment;
 use Blog\Controller\ListController;
 
-return array(
-    'view_manager' => array(
-        'template_path_stack' => array(
-            __DIR__ . '/../view',
-        ),
-    ),
-    'controllers' => array(
+return [
+    'service_manager' => array(
         'invokables' => array(
-            'Blog\Controller\List' => 'Blog\Controller\ListController'
+            'Blog\Service\PostServiceInterface' => 'Blog\Service\PostService'
+        )
+    ),
+    'view_manager' => [
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+    ],
+    'controllers'  => array(
+        'factories' => array(
+            'Blog\Controller\List' => 'Blog\Factory\ListControllerFactory'
         )
     ),
     // This lines opens the configuration for the RouteManager
-    'router' => array(
+    'router' => [
         // Open configuration for all possible routes
-        'routes' => array(
+        'routes' => [
             // Define a new route called "post"
-            'post' => array(
+            'post' => [
                 // Define the routes type to be "Zend\Mvc\Router\Http\Literal", which is basically just a string
                 'type' => 'literal',
                 // Configure the route itself
-                'options' => array(
+                'options' => [
                     // Listen to "/blog" as uri
                     'route'    => '/blog',
                     // Define default controller and action to be called when this route is matched
-                    'defaults' => array(
+                    'defaults' => [
                         'controller' => 'Blog\Controller\List',
                         'action'     => 'index',
-                    )
-                )
-            )
-        )
-    )
-);
+                    ]
+                ]
+            ]
+        ]
+    ]
+];
