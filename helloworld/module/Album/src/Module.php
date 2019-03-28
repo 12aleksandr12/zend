@@ -18,7 +18,6 @@ class Module implements ConfigProviderInterface
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    // Add this method:
     public function getServiceConfig()
     {
         return [
@@ -50,5 +49,6 @@ class Module implements ConfigProviderInterface
         ];
     }
 
+    
     
 }
